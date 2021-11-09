@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# bash rankSumm.sh train lang5 testmodel /home/dqwang/multilingual/data-bin/lang5
+# bash denoiseSumm.sh train lang5 testmodel /home/dqwang/multilingual/data-bin/shuffle
 
 ########################### Read the configs ###########################
 
@@ -67,15 +67,15 @@ if [ "$MODE" == "train" ]; then
     --save-dir ${local_checkpoint_path} \
     --tensorboard-logdir ${local_tensorboard_path} \
     --restore-file ${local_pretrained_path}/model.pt \
-    --task ranking_summaization \
-    --arch rank_summ_large \
+    --task denoise_summaization \
+    --arch mbart_large \
     --source-lang doc --target-lang sum \
     --langs $langs \
     --dataset-impl mmap \
     --truncate-source \
     --encoder-normalize-before --decoder-normalize-before \
     --layernorm-embedding \
-    --criterion cross_entropy_and_ranking --label-smoothing 0.2 \
+    --criterion label_smoothed_cross_entropy --label-smoothing 0.2 \
     --reset-optimizer --reset-dataloader --reset-meters --reset-lr-scheduler \
     --required-batch-size-multiple 1 \
     --dropout 0.1 --attention-dropout 0.1 \
@@ -88,17 +88,14 @@ if [ "$MODE" == "train" ]; then
     --find-unused-parameters \
     --num-workers 100 \
     --fp16 \
-    --max-tokens 4096 \
+    --max-tokens 2048 \
     --total-num-update 200000 --warmup-updates 2500 \
     --log-interval 200 \
     --log-format simple \
     --keep-best-checkpoints 3 \
     --no-epoch-checkpoints \
-    --patience 3 \
+    --patience 2 \
     --user-dir examples/summarization \
-    --ranking-head-name sentence_contrastive_head \
-    --negative-sample-number 1 \
-    --ranking-loss-weight 1 \
     $argslist
 
 fi

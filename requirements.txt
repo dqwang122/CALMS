@@ -1,0 +1,8 @@
+numpy==1.20.0
+nltk
+pysbd
+sacremoses
+pysbd
+zhon
+sentencepiece
+pyahocorasick

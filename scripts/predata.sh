@@ -25,7 +25,7 @@ fi
 echo "Parts are : ${PARTS[*]}"
 
 VOCAB_SIZE=32000
-DATA="$DATADIR/clean0226/$LG"
+DATA="$DATADIR/clean/$LG"
 TOKEN="$DATADIR/$MODE/$LG"
 if [ ! -d "$TOKEN"  ] ; then
     mkdir -p "$TOKEN"
@@ -71,7 +71,7 @@ elif [[ "$MODE" == "MSPM" ]]; then
   MBART=/mnt/bd/wdq-workshop/pretrain/mbart.cc25
   MODEL=$MBART/sentence.bpe.model
   # DICT=$MBART/dict.txt
-  DICT=$MBART/dict_extend.txt
+  DICT=$MBART/dict_extend.txt # add language tags
 
 
   echo "MSPM encoding for dataset..."

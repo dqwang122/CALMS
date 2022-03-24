@@ -4,6 +4,7 @@ Code and dataset for 'Contrastive Aligned Joint Learning for Multilingual Summar
 ## Organization
 ```
 CALMS                        
+├── fairseq                           # fairseq 0.9.0
 ├── myfairseq/examples/summarization    # fairseq user-dir
 │   ├── criterions                      # loss functions    			
 │   ├── data                            # dataset   
@@ -89,7 +90,9 @@ data-bin
 
 ## Training
 
-We build our model based on [Fairseq](https://github.com/pytorch/fairseq). Thus, to run the code, you should download Fairseq repository and put the *myfairseq/examples/summarization* under the *fairseq/example* directory. The files in *myfairseq/examples/summarization/data* should be put under the *fairseq/fairseq/data/* and the *fairseq/fairseq/data/\_\_init\_\_.py* must be modified to include them.
+We build our model based on [Fairseq](https://github.com/pytorch/fairseq). Thus, to run the code, you should use fairseq repository and put the *myfairseq/examples/summarization* under the *fairseq/example* directory. You can also change the '--user-dir' path in 'finetine\*.sh' to avoid this operation.
+
+The files in *myfairseq/examples/summarization/data* should be put under the *fairseq/fairseq/data/* and the *fairseq/fairseq/data/\_\_init\_\_.py* must be modified to include them. (We have done this for you.)
 
 We define several new tasks for our training strategies:
 
